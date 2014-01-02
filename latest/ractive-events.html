@@ -16,14 +16,14 @@
 
 	<main><div class="breadcrumbs"><a href="ractive-js-documentation">Home</a> &raquo; <a href="api-reference">API Reference</a> &raquo; <a href="ractive-events">Ractive.events</a></div>
 
-<p>If you&#39;re using <a href="Events#proxy-events">proxy events</a>, you can either use the standard DOM events that an element can listen to (e.g. <code>click</code>, <code>mouseover</code>, <code>touchmove</code>, <code>load</code>, whatever) or you can use custom event definitions.</p>
+<p>If you&#39;re using <a href="Events#on-events">proxy events</a>, you can either use the standard DOM events that an element can listen to (e.g. <code>click</code>, <code>mouseover</code>, <code>touchmove</code>, <code>load</code>, whatever) or you can use custom event definitions.</p>
 <p>These allow you to define more complex events than the native ones, but still treat them as first class citizens. For example the <code>tap</code> event abstracts away differences between mouse and touch interfaces, eliminating the 300ms delay users would experience on a touch device if you were only listening for <code>click</code> events:</p>
-<pre class="prettyprint lang-html">&lt;a class='button' proxy-tap='select'&gt;Tap me!&lt;/a&gt;</pre>
+<pre class="prettyprint lang-html">&lt;a class='button' on-tap='select'&gt;Tap me!&lt;/a&gt;</pre>
 
 <p>You could also use the event definition API to normalise browser behaviour (e.g. with <code>mouseenter</code> and <code>mouseleave</code>, which are handy and widely-used events, but non-standard ones), or to implement swiping and other gestures.</p>
 <p>Future versions of Ractive may include more event definitions &#39;out of the box&#39; &ndash; for now, there is just the <code>tap</code> event.</p>
 <h2 id="the-event-definition-api">The event definition API</h2>
-<p>When Ractive sees a <code>proxy-[eventName]</code> directive, it first looks in <code>Ractive.eventDefinitions</code> for an <code>[eventName]</code> property, and if it finds one it <em>applies the definition</em>. (If not, it assumes that <code>[eventName]</code> refers to a native DOM event.)</p>
+<p>When Ractive sees a <code>on-[eventName]</code> directive, it first looks in <code>Ractive.eventDefinitions</code> for an <code>[eventName]</code> property, and if it finds one it <em>applies the definition</em>. (If not, it assumes that <code>[eventName]</code> refers to a native DOM event.)</p>
 <p>Event definitions receive two arguments &ndash; <code>node</code>, and <code>fire</code>. <code>node</code> is the element to which the definition is being applied, and <code>fire</code> is the function that must be called when the event has taken place.</p>
 <h3 id="-fire-when-ready"><code>fire</code> when ready</h3>
 <p>The <code>fire</code> function takes a single argument which is the <code>event</code> object received by handlers. It will be augmented with <code>context</code>, <code>keypath</code> and <code>index</code> properties (TODO: explain these).</p>
@@ -139,7 +139,7 @@
 };</pre>
 
 <p>You can now use the <code>menu</code> event in Ractive instances:</p>
-<pre class="prettyprint lang-html">&lt;div proxy-menu='showMenu'&gt;This element has its own context menu&lt;/div&gt;</pre>
+<pre class="prettyprint lang-html">&lt;div on-menu='showMenu'&gt;This element has its own context menu&lt;/div&gt;</pre>
 
 <pre class="prettyprint lang-js">ractive = new Ractive({
   el: myContainer,
